@@ -1,0 +1,71 @@
+name: APK de base
+
+# Compile base-app/apk-src en APK et le publie dans la release « base-apk ».
+# C'est cet APK que Morphe Manager transforme avec le patch « ModProd App ».
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'base-app/apk-src/**'
+      - '.github/workflows/base-apk.yml'
+      - '.github/scripts/apktool_json_to_yml.py'
+
+permissions:
+  contents: write
+
+env:
+  APKTOOL_VERSION: '2.12.1'
+
+jobs:
+  build:
+    name: Compiler l'APK de base
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Télécharger Apktool
+        run: |
+          curl -sSL -o apktool.jar \
+            "https://github.com/iBotPeaches/Apktool/releases/download/v${APKTOOL_VERSION}/apktool_${APKTOOL_VERSION}.jar"
+
+      - name: Préparer les sources (apktool.json → apktool.yml)
+        run: |
+          cp -r base-app/apk-src build-src
+          python3 .github/scripts/apktool_json_to_yml.py build-src "$APKTOOL_VERSION"
+
+      - name: Compiler
+        run: java -jar apktool.jar b build-src -o unsigned.apk
+
+      - name: Aligner et signer (clé de test)
+        run: |
+          BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
+          "$BT/zipalign" -p -f 4 unsigned.apk aligned.apk
+          keytool -genkeypair -keystore test.jks -storepass android -keypass android \
+            -alias base -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=ModProd Base"
+          "$BT/apksigner" sign --ks test.jks --ks-pass pass:android --out modprod-base.apk aligned.apk
+          "$BT/apksigner" verify modprod-base.apk
+          "$BT/aapt2" dump badging modprod-base.apk | head -3
+
+      - name: Publier dans la release « base-apk »
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release view base-apk >/dev/null 2>&1 || \
+            gh release create base-apk --title "APK de base" --prerelease \
+              --notes "APK de base à transformer avec Morphe Manager (patch « ModProd App »)."
+          gh release upload base-apk modprod-base.apk --clobber
+
+      - name: Artefact
+        uses: actions/upload-artifact@v4
+        with:
+          name: modprod-base-apk
+          path: modprod-base.apk
