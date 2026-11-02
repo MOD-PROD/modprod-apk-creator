@@ -128,3 +128,6 @@ node_modules/
 # Ignore IDEA files
 .idea/
 local.properties
+
+# Sources de l APK de base : tout est suivi
+!base-app/**/build/
