@@ -1,3 +1,9 @@
+## [1.0.1](https://github.com/MOD-PROD/modprod-apk-creator/compare/v1.0.0...v1.0.1) (2026-11-02)
+
+### 🐛 Bug Fixes
+
+* le code de version est maintenant appliqué (option entière) ([bf381ed](https://github.com/MOD-PROD/modprod-apk-creator/commit/bf381ede094f96d1445f675d06e6cad557127067))
+
 ## 1.0.0 (2026-11-02)
 
 ### ✨ New Features
