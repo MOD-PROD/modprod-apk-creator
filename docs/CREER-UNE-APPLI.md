@@ -22,6 +22,7 @@ Download/MonAppli/
 | Nom de l'appli | oui | `res/values/strings.xml` → `app_name` |
 | Nom de package | oui | manifeste : `package`, permission `….DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION`, `android:authorities` des providers |
 | Dossier de l'appli HTML | non | remplace tout `assets/htmlapp/root/index/` |
+| Adresse web (au lieu du HTML) | non | `https://…` : l'appli ouvre ce site. Remplace le lanceur `root/index.html` ; le dossier HTML est alors ignoré |
 | Fichier de configuration | non | remplace `assets/htmlapp/root/config/` par `config.js` |
 | Icône | non | `res/mipmap*/ic_launcher.png` + `ic_launcher_round.png` + `assets/htmlapp/root/icon.png` |
 | Version (nom) | non | `android:versionName` |
@@ -30,13 +31,25 @@ Download/MonAppli/
 Règles du nom de package : minuscules, au moins deux segments (`com.modprod.monappli`),
 lettres/chiffres/_, chaque segment commence par une lettre, pas de mot réservé Java (`new`, `class`, `int`…).
 
-## 3. Mises à jour d'une appli
+## 3. Appli « site web »
+
+Remplir **Adresse web** (ex. `https://quantix.modprod.app/`) au lieu du dossier HTML.
+
+- Le site s'ouvre dans l'appli ; tous les liens `http(s)` restent dans l'appli,
+  `mailto:`, `tel:`, `geo:`, `whatsapp:`… ouvrent l'appli Android correspondante.
+- Bouton retour : page précédente du site, puis fermeture de l'appli
+  (ou `window.__appBack()` si le site la définit, voir le contrat JS).
+- Hors connexion : page d'erreur avec un bouton **Réessayer**.
+- Seules les adresses `https://` sont acceptées (Android bloque le `http://` non chiffré).
+- Le pont `Android` (`Android.getBase64FromBlobData`, `Android.autoSave`…) est aussi disponible pour le site.
+
+## 4. Mises à jour d'une appli
 
 - Garder **le même nom de package** et augmenter **Version (code)**.
 - Morphe Manager signe avec sa propre clé : toujours patcher depuis le même Morphe Manager
   (sinon Android refuse la mise à jour → exporter les données avant de désinstaller).
 
-## 4. Tester sans repatcher
+## 5. Tester sans repatcher
 
 Dans l'appli : 10 touchers sur le logo → **Menu développeur** → *Charger un .html…*
 La version de test remplace la page intégrée jusqu'à *Revenir à la version intégrée*.

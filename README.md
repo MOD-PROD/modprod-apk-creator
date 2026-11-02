@@ -1,6 +1,6 @@
 # 🧩 ModProd APK Creator
 
-Crée une appli Android à partir d'une page HTML, **sur le téléphone**, sans recompiler à la main :
+Crée une appli Android à partir d'une page HTML ou d'un site web, **sur le téléphone**, sans recompiler à la main :
 l'**APK de base** ModProd + le patch **« ModProd App »** pour Morphe Manager.
 
 Ajouter les patches à Morphe Manager :
@@ -24,6 +24,7 @@ Ajouter les patches à Morphe Manager :
    - **Nom de l'appli** (obligatoire)
    - **Nom de package** (obligatoire, unique par appli, ex. `com.modprod.quantix`)
    - **Dossier de l'appli HTML** : dossier contenant la page `.html` (et ses images, css, js)
+   - ou **Adresse web** : un site `https://…` à ouvrir à la place de la page HTML
    - **Fichier de configuration** (`.js`, facultatif), **Icône** (`.png` carré, facultatif)
    - **Version (nom / code)** (facultatif)
 4. Lancer le patch → installer l'appli créée.

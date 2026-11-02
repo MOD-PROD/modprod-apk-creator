@@ -46,6 +46,25 @@ internal fun escapeAndroidString(text: String): String {
     return if (escaped.startsWith("@") || escaped.startsWith("?")) "\\$escaped" else escaped
 }
 
+/** Adresse https:// complète, sans espace. */
+internal fun isValidWebUrl(url: String?): Boolean =
+    url?.trim()?.matches(Regex("^https://[^\\s/?#]+\\.[^\\s]*$", RegexOption.IGNORE_CASE)) == true
+
+/** Texte sûr dans une chaîne JavaScript placée dans une balise <script>. */
+internal fun jsString(text: String): String =
+    "\"" + text
+        .replace("\\", "\\\\")
+        .replace("\"", "\\\"")
+        .replace("\n", "\\n")
+        .replace("\r", "\\r")
+        .replace("<", "\\u003c")
+        .replace("\u2028", "\\u2028")
+        .replace("\u2029", "\\u2029") + "\""
+
+/** Texte sûr dans du HTML. */
+internal fun htmlText(text: String): String =
+    text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;")
+
 /** Densités des icônes de lancement de l'APK de base. */
 private val MIPMAP_FOLDERS = listOf(
     "mipmap", "mipmap-mdpi", "mipmap-hdpi", "mipmap-xhdpi", "mipmap-xxhdpi", "mipmap-xxxhdpi",
@@ -55,7 +74,7 @@ private val MIPMAP_FOLDERS = listOf(
 val modProdAppPatch = resourcePatch(
     name = "ModProd App",
     description = "Transforme l'APK de base en une nouvelle appli : nom, nom de package, " +
-        "page HTML, configuration, icône et version.",
+        "page HTML ou adresse web, configuration, icône et version.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_BASE)
@@ -82,6 +101,14 @@ val modProdAppPatch = resourcePatch(
             "Son contenu remplace assets/htmlapp/root/index/. " +
             "Le lanceur ouvre index.html, sinon le premier .html par ordre alphabétique.",
     )
+
+    val webUrl by stringOption(
+        key = "webUrl",
+        title = "Adresse web (au lieu du HTML)",
+        description = "Adresse https:// d'un site à ouvrir à la place de la page HTML intégrée " +
+            "(ex. https://quantix.modprod.app/). Si elle est remplie, le dossier HTML est ignoré. " +
+            "Les liens http(s) restent dans l'appli, mailto:/tel:… ouvrent l'appli Android correspondante.",
+    ) { it.isNullOrBlank() || isValidWebUrl(it) }
 
     val configFile by filePathOption(
         key = "configFile",
@@ -117,7 +144,13 @@ val modProdAppPatch = resourcePatch(
 
         setAppName(appName!!.trim())
         renamePackage(oldPackage, newPackage, versionName?.trim(), versionCode?.toString())
-        htmlFolder?.takeIf { it.isNotBlank() }?.let { copyHtmlFolder(File(it.trim())) }
+        val url = webUrl?.trim()?.takeIf { it.isNotEmpty() }
+        if (url != null) {
+            if (!htmlFolder.isNullOrBlank()) logger.warning("Adresse web remplie : le dossier HTML est ignoré")
+            writeWebLauncher(url, appName!!.trim())
+        } else {
+            htmlFolder?.takeIf { it.isNotBlank() }?.let { copyHtmlFolder(File(it.trim())) }
+        }
         configFile?.takeIf { it.isNotBlank() }?.let { copyConfig(File(it.trim())) }
         iconFile?.takeIf { it.isNotBlank() }?.let { copyIcon(File(it.trim())) }
 
@@ -196,6 +229,29 @@ private fun ResourcePatchContext.copyHtmlFolder(folder: File) {
         .forEach { delete(it) }
 
     relativePaths.forEach { (file, path) -> writeEntry(ASSETS_INDEX + path, file) }
+}
+
+/** Remplace le lanceur (root/index.html) par une redirection vers l'adresse web. */
+private fun ResourcePatchContext.writeWebLauncher(url: String, appName: String) {
+    val html = """
+        |<!DOCTYPE html>
+        |<html lang="fr">
+        |<head>
+        |<meta charset="UTF-8">
+        |<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+        |<meta name="color-scheme" content="dark">
+        |<title>${htmlText(appName)}</title>
+        |<style>html,body{margin:0;height:100%;background:#141a21}</style>
+        |</head>
+        |<body>
+        |<script>
+        |/* Lanceur web (patch ModProd App) : ouvre le site dans l'appli. */
+        |location.replace(${jsString(url)});
+        |</script>
+        |</body>
+        |</html>
+        |""".trimMargin()
+    get(ASSETS_ROOT + "index.html", false).writeText(html, Charsets.UTF_8)
 }
 
 /** Remplace le fichier de configuration (le premier .js de config/ est chargé). */
