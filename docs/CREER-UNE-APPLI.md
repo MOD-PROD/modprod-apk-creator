@@ -31,6 +31,29 @@ Download/MonAppli/
 Règles du nom de package : minuscules, au moins deux segments (`com.modprod.monappli`),
 lettres/chiffres/_, chaque segment commence par une lettre, pas de mot réservé Java (`new`, `class`, `int`…).
 
+## 2 bis. Patch « ModProd Réglages » (facultatif, activé par défaut)
+
+Valeurs par défaut = APK de base inchangé.
+
+| Option | Défaut | Effet dans l'APK |
+|---|---|---|
+| Orientation | Portrait | `Portrait` bloqué ou `Automatique (rotation)` (bools.xml `portrait` + manifeste) |
+| Plein écran | non | masque la barre d'état (`fullscr`) |
+| Écran toujours allumé | non | `keepScreenOn` |
+| Bloquer les captures d'écran | non | `flag_secure` (aussi l'aperçu des applis récentes) |
+| Zoom à deux doigts | non | `Zoom` |
+| Barres de défilement | non | `ScrollBars` |
+| Inspection depuis Chrome PC | non | `isDebugMode` (chrome://inspect) — à couper pour une version publiée |
+| Couleur de fond | #141a21 | thème (fond + splash Android 12), layout, `loading.html`, `error.html` |
+| Couleur des barres système | #141a21 | barre d'état + navigation ; couleur claire = icônes sombres automatiquement |
+| Couleur d'accent | #f08a24 | `colorAccent` (fenêtres Android « Save As »…) |
+| Autorisation : caméra | non | `CAMERA` (photo depuis un champ fichier, vidéo getUserMedia) |
+| Autorisation : micro | non | `RECORD_AUDIO` + `MODIFY_AUDIO_SETTINGS` |
+| Autorisation : localisation | non | `ACCESS_FINE_LOCATION` + `ACCESS_COARSE_LOCATION` |
+
+Couleurs : `#RGB`, `#RRGGBB` ou `#AARRGGBB`. Les demandes d'autorisation à l'utilisateur sont déjà dans l'APK de base :
+il suffit de cocher l'autorisation dont la page a besoin.
+
 ## 3. Appli « site web »
 
 Remplir **Adresse web** (ex. `https://quantix.modprod.app/`) au lieu du dossier HTML.

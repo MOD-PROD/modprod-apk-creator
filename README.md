@@ -16,7 +16,7 @@ Ajouter les patches à Morphe Manager :
 | `.github/workflows/base-apk.yml` | Compile l'APK de base → release [**base-apk**](https://github.com/MOD-PROD/modprod-apk-creator/releases/tag/base-apk). |
 | `.github/workflows/release.yml` | Compile les patches → release `vX.Y.Z` (fichier `.mpp`) lue par Morphe Manager. |
 
-## 🚀 Créer une appli en 4 étapes
+## 🚀 Créer une appli en 5 étapes
 
 1. Télécharger **`modprod-base.apk`** depuis la release [base-apk](https://github.com/MOD-PROD/modprod-apk-creator/releases/tag/base-apk).
 2. Dans **Morphe Manager** : ajouter la source ci-dessus, puis choisir l'APK de base depuis le stockage.
@@ -27,7 +27,9 @@ Ajouter les patches à Morphe Manager :
    - ou **Adresse web** : un site `https://…` à ouvrir à la place de la page HTML
    - **Fichier de configuration** (`.js`, facultatif), **Icône** (`.png` carré, facultatif)
    - **Version (nom / code)** (facultatif)
-4. Lancer le patch → installer l'appli créée.
+4. Patch **ModProd Réglages** (facultatif) : orientation, plein écran, écran allumé, captures bloquées, zoom,
+   couleurs (fond, barres, accent), autorisations caméra / micro / localisation.
+5. Lancer les patches → installer l'appli créée.
 
 Détails : [docs/CREER-UNE-APPLI.md](docs/CREER-UNE-APPLI.md).
 
