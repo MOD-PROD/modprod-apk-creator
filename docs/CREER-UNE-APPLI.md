@@ -25,6 +25,7 @@ Download/MonAppli/
 | Nom de package | oui | manifeste : `package`, permission `….DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION`, `android:authorities` des providers |
 | Dossier de l'appli HTML | non | remplace tout `assets/htmlapp/root/index/` |
 | Adresse web (au lieu du HTML) | non | `https://…` : l'appli ouvre ce site. Remplace le lanceur `root/index.html` ; le dossier HTML est alors ignoré |
+| Icône du site (adresse web) | non (activé) | avec une adresse web et sans icône choisie : récupère l'icône PNG du site pendant le patch (manifest web → icône « any » la plus grande, puis apple-touch-icon, puis `<link rel="icon">`) |
 | Fichier de configuration | non | remplace `assets/htmlapp/root/config/` par `config.js` |
 | Icône | non | `res/mipmap*/ic_launcher.png` + `ic_launcher_round.png` + `assets/htmlapp/root/icon.png` |
 | Version (nom) | non | `android:versionName` |
@@ -64,6 +65,8 @@ Remplir **Adresse web** (ex. `https://quantix.modprod.app/`) au lieu du dossier 
   `mailto:`, `tel:`, `geo:`, `whatsapp:`… ouvrent l'appli Android correspondante.
 - Bouton retour : page précédente du site, puis fermeture de l'appli
   (ou `window.__appBack()` si le site la définit, voir le contrat JS).
+- Icône : laissée vide, elle est récupérée sur le site (connexion nécessaire pendant le patch). Seuls les PNG
+  d'au moins 48 px sont pris ; sinon l'icône « APK Base » est gardée (avertissement dans le journal du patch).
 - Hors connexion : page d'erreur avec un bouton **Réessayer**.
 - Seules les adresses `https://` sont acceptées (Android bloque le `http://` non chiffré).
 - Le pont `Android` (`Android.getBase64FromBlobData`, `Android.autoSave`…) est aussi disponible pour le site.

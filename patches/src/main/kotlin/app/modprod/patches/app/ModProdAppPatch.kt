@@ -6,6 +6,7 @@ import app.modprod.patches.shared.Constants.ASSETS_ROOT
 import app.modprod.patches.shared.Constants.COMPATIBILITY_BASE
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.ResourcePatchContext
+import app.morphe.patcher.patch.booleanOption
 import app.morphe.patcher.patch.filePathOption
 import app.morphe.patcher.patch.folderOption
 import app.morphe.patcher.patch.intOption
@@ -118,6 +119,14 @@ val modProdAppPatch = resourcePatch(
         allowedExtensions = listOf("js"),
     )
 
+    val webIcon by booleanOption(
+        key = "webIcon",
+        default = true,
+        title = "Icône du site (adresse web)",
+        description = "Avec une adresse web et sans icône choisie : récupère l'icône PNG du site " +
+            "(manifest web, apple-touch-icon…) pendant le patch. Sans connexion ou sans icône PNG : icône par défaut.",
+    )
+
     val iconFile by filePathOption(
         key = "iconFile",
         title = "Icône",
@@ -152,7 +161,19 @@ val modProdAppPatch = resourcePatch(
             htmlFolder?.takeIf { it.isNotBlank() }?.let { copyHtmlFolder(File(it.trim())) }
         }
         configFile?.takeIf { it.isNotBlank() }?.let { copyConfig(File(it.trim())) }
-        iconFile?.takeIf { it.isNotBlank() }?.let { copyIcon(File(it.trim())) }
+        val chosenIcon = iconFile?.trim()?.takeIf { it.isNotEmpty() }
+        if (chosenIcon != null) {
+            copyIcon(File(chosenIcon))
+        } else if (url != null && webIcon != false) {
+            val bytes = fetchWebIcon(url)
+            if (bytes != null) {
+                val temp = File.createTempFile("web-icon", ".png").apply { deleteOnExit() }
+                temp.writeBytes(bytes)
+                copyIcon(temp)
+            } else {
+                logger.warning("Aucune icône PNG trouvée sur $url : icône par défaut conservée")
+            }
+        }
 
         logger.info("Appli « ${appName!!.trim()} » créée avec le package $newPackage")
     }
