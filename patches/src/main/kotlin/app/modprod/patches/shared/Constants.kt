@@ -10,11 +10,11 @@ object Constants {
     const val BASE_RELEASE = "https://github.com/MOD-PROD/modprod-apk-creator/releases/download/base-apk/"
 
     /** Nom de package de l'APK de base (base-app/apk-src). */
-    const val BASE_PACKAGE = "com.gonzo.htmlapp"
+    const val BASE_PACKAGE = "app.modprod.apkbase"
     const val BASE_APK_URL = BASE_RELEASE + "apk-base.apk"
 
     /** Nom de package de l'APK de base Android TV (base-app/atv-src). */
-    const val ATV_PACKAGE = "atv.links"
+    const val ATV_PACKAGE = "app.modprod.atvlink.base"
     const val ATV_APK_URL = BASE_RELEASE + "atv-base.apk"
 
     /** Dossiers des assets de l'appli HTML dans l'APK de base. */

@@ -130,4 +130,5 @@ node_modules/
 local.properties
 
 # Sources de l APK de base : tout est suivi
-!base-app/**/build/
+!base-app/**/META-INF/**/build/
+base-app/*/build/

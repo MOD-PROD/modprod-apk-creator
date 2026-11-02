@@ -1,7 +1,7 @@
 # Lanceur Android TV — patch « ATV Launcher »
 
 APK à patcher : [`atv-base.apk`](https://github.com/MOD-PROD/modprod-apk-creator/releases/download/base-apk/atv-base.apk)
-(« ATV Base », package `atv.links`, sources dans `base-app/atv-src/`).
+(« ATV Base », package `app.modprod.atvlink.base`, sources dans `base-app/atv-src/`).
 
 Le lanceur apparaît sur l'écran d'accueil de la TV (bannière) et ouvre sa cible, puis se ferme.
 

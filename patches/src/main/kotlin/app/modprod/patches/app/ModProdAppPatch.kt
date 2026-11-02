@@ -90,7 +90,7 @@ val modProdAppPatch = resourcePatch(
     val packageName by stringOption(
         key = "packageName",
         title = "Nom de package",
-        description = "Identifiant unique de l'appli (ex. com.modprod.quantix). " +
+        description = "Identifiant unique de l'appli (ex. app.modprod.quantix). " +
             "Minuscules, au moins deux segments, lettres/chiffres/_, pas de mot réservé Java.",
         required = true,
     ) { isValidPackageName(it) }

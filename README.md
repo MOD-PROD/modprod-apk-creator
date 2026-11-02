@@ -24,7 +24,7 @@ Ajouter les patches à Morphe Manager :
 2. Dans **Morphe Manager** : ajouter la source ci-dessus, puis choisir l'APK de base depuis le stockage.
 3. Patch **ModProd App** → remplir les options :
    - **Nom de l'appli** (obligatoire)
-   - **Nom de package** (obligatoire, unique par appli, ex. `com.modprod.quantix`)
+   - **Nom de package** (obligatoire, unique par appli, ex. `app.modprod.quantix`)
    - **Dossier de l'appli HTML** : dossier contenant la page `.html` (et ses images, css, js)
    - ou **Adresse web** : un site `https://…` à ouvrir à la place de la page HTML
    - **Fichier de configuration** (`.js`, facultatif), **Icône** (`.png` carré, facultatif)

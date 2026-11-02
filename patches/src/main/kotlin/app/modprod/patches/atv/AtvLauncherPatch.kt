@@ -53,7 +53,7 @@ val atvLauncherPatch = resourcePatch(
     val packageName by stringOption(
         key = "packageName",
         title = "Nom de package",
-        description = "Identifiant unique du lanceur (ex. com.modprod.tv.youtube). " +
+        description = "Identifiant unique du lanceur (ex. app.modprod.atvlink.youtube). " +
             "Minuscules, au moins deux segments, lettres/chiffres/_, pas de mot réservé Java.",
         required = true,
     ) { isValidPackageName(it) }

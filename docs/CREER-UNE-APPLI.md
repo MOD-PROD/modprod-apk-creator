@@ -31,7 +31,7 @@ Download/MonAppli/
 | Version (nom) | non | `android:versionName` |
 | Version (code) | non | `android:versionCode` (entier, +1 à chaque mise à jour) |
 
-Règles du nom de package : minuscules, au moins deux segments (`com.modprod.monappli`),
+Règles du nom de package : minuscules, au moins deux segments (`app.modprod.monappli`),
 lettres/chiffres/_, chaque segment commence par une lettre, pas de mot réservé Java (`new`, `class`, `int`…).
 
 ## 2 bis. Patch « ModProd Réglages » (facultatif, activé par défaut)
