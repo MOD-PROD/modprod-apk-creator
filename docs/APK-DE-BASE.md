@@ -1,6 +1,6 @@
-# APK de base — repères
+# APK Base — repères
 
-Sources : `base-app/apk-src/` (format Apktool M). Package de base : `com.gonzo.htmlapp`.
+Sources : `base-app/apk-src/` (format Apktool M). Package de base : `com.gonzo.htmlapp`, nom affiché « APK Base », APK publié : `apk-base.apk`.
 Toute modification de ces sources recompile l'APK (workflow **APK de base**) et met à jour
 la release [base-apk](https://github.com/MOD-PROD/modprod-apk-creator/releases/tag/base-apk).
 

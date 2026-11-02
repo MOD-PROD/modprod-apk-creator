@@ -1,7 +1,7 @@
 # 🧩 ModProd APK Creator
 
 Crée une appli Android à partir d'une page HTML ou d'un site web, **sur le téléphone**, sans recompiler à la main :
-l'**APK de base** ModProd + le patch **« ModProd App »** pour Morphe Manager.
+l'**APK Base** ModProd + les patches pour Morphe Manager. Crée aussi des **lanceurs Android TV** (ATV Base + patch « ATV Launcher »).
 
 Ajouter les patches à Morphe Manager :
 👉 https://morphe.software/add-source?github=MOD-PROD/modprod-apk-creator
@@ -10,15 +10,17 @@ Ajouter les patches à Morphe Manager :
 
 | Dossier | Rôle |
 |---|---|
-| `base-app/apk-src/` | Sources de l'APK de base (format **Apktool M** : smali, manifeste, res, assets). Modifiables sur le téléphone. |
-| `patches/` | Projet Morphe : le patch **ModProd App** (Kotlin). |
+| `base-app/apk-src/` | Sources de l'**APK Base** (format **Apktool M** : smali, manifeste, res, assets). Modifiables sur le téléphone. |
+| `base-app/atv-src/` | Sources de l'**ATV Base** (lanceur Android TV, format Apktool M). |
+| `base-app/icons/` | Icônes sources des APK de base. |
+| `patches/` | Projet Morphe : patches **ModProd App**, **ModProd Réglages**, **ATV Launcher** (Kotlin). |
 | `docs/` | Documentation : [créer une appli](docs/CREER-UNE-APPLI.md), [APK de base](docs/APK-DE-BASE.md). |
-| `.github/workflows/base-apk.yml` | Compile l'APK de base → release [**base-apk**](https://github.com/MOD-PROD/modprod-apk-creator/releases/tag/base-apk). |
+| `.github/workflows/base-apk.yml` | Compile les APK de base → release [**base-apk**](https://github.com/MOD-PROD/modprod-apk-creator/releases/tag/base-apk). |
 | `.github/workflows/release.yml` | Compile les patches → release `vX.Y.Z` (fichier `.mpp`) lue par Morphe Manager. |
 
 ## 🚀 Créer une appli en 5 étapes
 
-1. Télécharger **`modprod-base.apk`** depuis la release [base-apk](https://github.com/MOD-PROD/modprod-apk-creator/releases/tag/base-apk).
+1. Télécharger **[`apk-base.apk`](https://github.com/MOD-PROD/modprod-apk-creator/releases/download/base-apk/apk-base.apk)** (le lien est aussi affiché dans Morphe Manager).
 2. Dans **Morphe Manager** : ajouter la source ci-dessus, puis choisir l'APK de base depuis le stockage.
 3. Patch **ModProd App** → remplir les options :
    - **Nom de l'appli** (obligatoire)
@@ -32,6 +34,15 @@ Ajouter les patches à Morphe Manager :
 5. Lancer les patches → installer l'appli créée.
 
 Détails : [docs/CREER-UNE-APPLI.md](docs/CREER-UNE-APPLI.md).
+
+## 📺 Créer un lanceur Android TV
+
+1. Télécharger **[`atv-base.apk`](https://github.com/MOD-PROD/modprod-apk-creator/releases/download/base-apk/atv-base.apk)**.
+2. Morphe Manager → patch **ATV Launcher** : nom, package, action (lien / appli installée / appli sinon lien),
+   lien cible, package cible, bannière 320 × 180, icône, « Jeux », version.
+3. Installer l'APK créé sur la TV.
+
+Détails : [docs/ATV-LAUNCHER.md](docs/ATV-LAUNCHER.md).
 
 ## 🩹 Patches
 

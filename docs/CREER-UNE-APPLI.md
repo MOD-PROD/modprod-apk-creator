@@ -1,5 +1,7 @@
 # Créer une appli avec le patch « ModProd App »
 
+APK à patcher : [`apk-base.apk`](https://github.com/MOD-PROD/modprod-apk-creator/releases/download/base-apk/apk-base.apk) (« APK Base »).
+
 ## 1. Préparer les fichiers sur le téléphone
 
 ```
