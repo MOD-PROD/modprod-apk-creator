@@ -34,14 +34,14 @@ Détails : [docs/CREER-UNE-APPLI.md](docs/CREER-UNE-APPLI.md).
 ## 🩹 Patches
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.0.1](https://github.com/MOD-PROD/modprod-apk-creator/releases/tag/v1.0.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;1 patches total
+> **[v1.1.0](https://github.com/MOD-PROD/modprod-apk-creator/releases/tag/v1.1.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;1 patches total
 <details open>
 <summary>📦 ModProd APK Base&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
 <br>
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
-| [ModProd App](#modprod-app) | Transforme l'APK de base en une nouvelle appli : nom, nom de package, page HTML, configuration, icône et version. | • Nom de l'appli<br>• Nom de package<br>• Dossier de l'appli HTML<br>• Fichier de configuration<br>• Icône<br>• Version (nom)<br>• Version (code) |
+| [ModProd App](#modprod-app) | Transforme l'APK de base en une nouvelle appli : nom, nom de package, page HTML ou adresse web, configuration, icône et version. | • Nom de l'appli<br>• Nom de package<br>• Dossier de l'appli HTML<br>• Adresse web (au lieu du HTML)<br>• Fichier de configuration<br>• Icône<br>• Version (nom)<br>• Version (code) |
 
 </details>
 

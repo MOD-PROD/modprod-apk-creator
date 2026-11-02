@@ -1,3 +1,9 @@
+## [1.1.0](https://github.com/MOD-PROD/modprod-apk-creator/compare/v1.0.1...v1.1.0) (2026-11-02)
+
+### ✨ New Features
+
+* option Adresse web pour ouvrir un site à la place de la page HTML ([09c43e0](https://github.com/MOD-PROD/modprod-apk-creator/commit/09c43e09ec0e718be1bee7527a8b4ebe0c24799f))
+
 ## [1.0.1](https://github.com/MOD-PROD/modprod-apk-creator/compare/v1.0.0...v1.0.1) (2026-11-02)
 
 ### 🐛 Bug Fixes

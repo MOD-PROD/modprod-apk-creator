@@ -1,10 +1,10 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "patches": [
     {
       "name": "ModProd App",
-      "description": "Transforme l'APK de base en une nouvelle appli : nom, nom de package, page HTML, configuration, icône et version.",
+      "description": "Transforme l'APK de base en une nouvelle appli : nom, nom de package, page HTML ou adresse web, configuration, icône et version.",
       "default": true,
       "category": null,
       "compatiblePackages": [
@@ -50,6 +50,15 @@
           "key": "htmlFolder",
           "title": "Dossier de l'appli HTML",
           "description": "Dossier contenant la page .html de l'appli (et ses fichiers : images, css, js…). Son contenu remplace assets/htmlapp/root/index/. Le lanceur ouvre index.html, sinon le premier .html par ordre alphabétique.",
+          "required": false,
+          "type": "kotlin.String",
+          "default": null,
+          "values": null
+        },
+        {
+          "key": "webUrl",
+          "title": "Adresse web (au lieu du HTML)",
+          "description": "Adresse https:// d'un site à ouvrir à la place de la page HTML intégrée (ex. https://quantix.modprod.app/). Si elle est remplie, le dossier HTML est ignoré. Les liens http(s) restent dans l'appli, mailto:/tel:… ouvrent l'appli Android correspondante.",
           "required": false,
           "type": "kotlin.String",
           "default": null,
