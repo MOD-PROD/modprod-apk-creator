@@ -8,6 +8,7 @@ import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.ResourcePatchContext
 import app.morphe.patcher.patch.filePathOption
 import app.morphe.patcher.patch.folderOption
+import app.morphe.patcher.patch.intOption
 import app.morphe.patcher.patch.resourcePatch
 import app.morphe.patcher.patch.stringOption
 import org.w3c.dom.Element
@@ -15,6 +16,8 @@ import java.io.File
 import java.util.logging.Logger
 
 private val logger = Logger.getLogger("ModProdAppPatch")
+
+private const val ANDROID_NS = "http://schemas.android.com/apk/res/android"
 
 /** Mots réservés Java : interdits comme segment d'un nom de package. */
 private val JAVA_RESERVED = setOf(
@@ -102,18 +105,18 @@ val modProdAppPatch = resourcePatch(
         description = "Ex. 1.0.0. Vide = inchangé.",
     )
 
-    val versionCode by stringOption(
+    val versionCode by intOption(
         key = "versionCode",
         title = "Version (code)",
         description = "Nombre entier, à augmenter à chaque mise à jour. Vide = inchangé.",
-    ) { it.isNullOrBlank() || it.trim().toIntOrNull()?.let { code -> code > 0 } == true }
+    ) { it == null || it > 0 }
 
     execute {
         val oldPackage = packageMetadata.packageName
         val newPackage = packageName!!.trim()
 
         setAppName(appName!!.trim())
-        renamePackage(oldPackage, newPackage, versionName?.trim(), versionCode?.trim())
+        renamePackage(oldPackage, newPackage, versionName?.trim(), versionCode?.toString())
         htmlFolder?.takeIf { it.isNotBlank() }?.let { copyHtmlFolder(File(it.trim())) }
         configFile?.takeIf { it.isNotBlank() }?.let { copyConfig(File(it.trim())) }
         iconFile?.takeIf { it.isNotBlank() }?.let { copyIcon(File(it.trim())) }
@@ -148,8 +151,9 @@ private fun ResourcePatchContext.renamePackage(
     document("AndroidManifest.xml").use { document ->
         val manifest = document.documentElement
         manifest.setAttribute("package", newPackage)
-        if (!versionName.isNullOrEmpty()) manifest.setAttribute("android:versionName", versionName)
-        if (!versionCode.isNullOrEmpty()) manifest.setAttribute("android:versionCode", versionCode)
+        // setAttributeNS remplace l'attribut android: existant (setAttribute en ajouterait un second).
+        if (!versionName.isNullOrEmpty()) manifest.setAttributeNS(ANDROID_NS, "android:versionName", versionName)
+        if (!versionCode.isNullOrEmpty()) manifest.setAttributeNS(ANDROID_NS, "android:versionCode", versionCode)
 
         fun rename(value: String) =
             if (value.startsWith("$oldPackage.")) value.replaceFirst(oldPackage, newPackage) else value
