@@ -1,5 +1,97 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "0.0.0",
-  "patches": []
+  "version": "1.0.0",
+  "patches": [
+    {
+      "name": "ModProd App",
+      "description": "Transforme l'APK de base en une nouvelle appli : nom, nom de package, page HTML, configuration, icône et version.",
+      "default": true,
+      "category": null,
+      "compatiblePackages": [
+        {
+          "packageName": "com.gonzo.htmlapp",
+          "name": "ModProd APK Base",
+          "description": null,
+          "apkFileType": "APK",
+          "appIconColor": "#F08A24",
+          "signatures": null,
+          "formFactor": "MOBILE",
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "key": "appName",
+          "title": "Nom de l'appli",
+          "description": "Nom affiché sous l'icône (ex. QuantiX 3D).",
+          "required": true,
+          "type": "kotlin.String",
+          "default": null,
+          "values": null
+        },
+        {
+          "key": "packageName",
+          "title": "Nom de package",
+          "description": "Identifiant unique de l'appli (ex. com.modprod.quantix). Minuscules, au moins deux segments, lettres/chiffres/_, pas de mot réservé Java.",
+          "required": true,
+          "type": "kotlin.String",
+          "default": null,
+          "values": null
+        },
+        {
+          "key": "htmlFolder",
+          "title": "Dossier de l'appli HTML",
+          "description": "Dossier contenant la page .html de l'appli (et ses fichiers : images, css, js…). Son contenu remplace assets/htmlapp/root/index/. Le lanceur ouvre index.html, sinon le premier .html par ordre alphabétique.",
+          "required": false,
+          "type": "kotlin.String",
+          "default": null,
+          "values": null
+        },
+        {
+          "key": "configFile",
+          "title": "Fichier de configuration",
+          "description": "Fichier .js de configuration (window.APP_CONFIG). Remplace le fichier de assets/htmlapp/root/config/.",
+          "required": false,
+          "type": "kotlin.String",
+          "default": null,
+          "values": null
+        },
+        {
+          "key": "iconFile",
+          "title": "Icône",
+          "description": "Image PNG carrée (512 × 512 conseillé). Remplace l'icône de lancement (normale et ronde) et assets/htmlapp/root/icon.png.",
+          "required": false,
+          "type": "kotlin.String",
+          "default": null,
+          "values": null
+        },
+        {
+          "key": "versionName",
+          "title": "Version (nom)",
+          "description": "Ex. 1.0.0. Vide = inchangé.",
+          "required": false,
+          "type": "kotlin.String",
+          "default": null,
+          "values": null
+        },
+        {
+          "key": "versionCode",
+          "title": "Version (code)",
+          "description": "Nombre entier, à augmenter à chaque mise à jour. Vide = inchangé.",
+          "required": false,
+          "type": "kotlin.String",
+          "default": null,
+          "values": null
+        }
+      ]
+    }
+  ]
 }
