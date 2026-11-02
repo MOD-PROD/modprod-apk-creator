@@ -47,7 +47,7 @@ Détails : [docs/ATV-LAUNCHER.md](docs/ATV-LAUNCHER.md).
 ## 🩹 Patches
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.3.0](https://github.com/MOD-PROD/modprod-apk-creator/releases/tag/v1.3.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;3 patches total
+> **[v1.4.0](https://github.com/MOD-PROD/modprod-apk-creator/releases/tag/v1.4.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;3 patches total
 <details open>
 <summary>📺 ATV Base (Android TV)&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
 <br>
@@ -64,7 +64,7 @@ Détails : [docs/ATV-LAUNCHER.md](docs/ATV-LAUNCHER.md).
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
-| [ModProd App](#modprod-app) | Transforme l'APK de base en une nouvelle appli : nom, nom de package, page HTML ou adresse web, configuration, icône et version. | • Nom de l'appli<br>• Nom de package<br>• Dossier de l'appli HTML<br>• Adresse web (au lieu du HTML)<br>• Fichier de configuration<br>• Icône<br>• Version (nom)<br>• Version (code) |
+| [ModProd App](#modprod-app) | Transforme l'APK de base en une nouvelle appli : nom, nom de package, page HTML ou adresse web, configuration, icône et version. | • Nom de l'appli<br>• Nom de package<br>• Dossier de l'appli HTML<br>• Adresse web (au lieu du HTML)<br>• Fichier de configuration<br>• Icône du site (adresse web)<br>• Icône<br>• Version (nom)<br>• Version (code) |
 | [ModProd Réglages](#modprod-r-glages) | Réglages Android de l'appli : orientation, plein écran, captures d'écran, écran allumé, zoom, couleurs, autorisations (caméra, micro, localisation). | • Orientation<br>• Plein écran<br>• Écran toujours allumé<br>• Bloquer les captures d'écran<br>• Zoom à deux doigts<br>• Barres de défilement<br>• Inspection depuis Chrome PC<br>• Couleur de fond<br>• Couleur des barres système<br>• Couleur d'accent<br>• Autorisation : caméra<br>• Autorisation : micro<br>• Autorisation : localisation |
 
 </details>

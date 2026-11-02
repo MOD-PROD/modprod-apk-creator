@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "patches": [
     {
       "name": "ATV Launcher",
@@ -193,6 +193,15 @@
           "required": false,
           "type": "kotlin.String",
           "default": null,
+          "values": null
+        },
+        {
+          "key": "webIcon",
+          "title": "Icône du site (adresse web)",
+          "description": "Avec une adresse web et sans icône choisie : récupère l'icône PNG du site (manifest web, apple-touch-icon…) pendant le patch. Sans connexion ou sans icône PNG : icône par défaut.",
+          "required": false,
+          "type": "kotlin.Boolean",
+          "default": true,
           "values": null
         },
         {

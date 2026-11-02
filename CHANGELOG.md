@@ -1,3 +1,9 @@
+## [1.4.0](https://github.com/MOD-PROD/modprod-apk-creator/compare/v1.3.0...v1.4.0) (2026-11-02)
+
+### ✨ New Features
+
+* icône récupérée automatiquement sur le site (option Adresse web) ([62afda3](https://github.com/MOD-PROD/modprod-apk-creator/commit/62afda3aa4d2bd94f7e7ef35893035ad2dd99cc1))
+
 ## [1.3.0](https://github.com/MOD-PROD/modprod-apk-creator/compare/v1.2.0...v1.3.0) (2026-11-02)
 
 ### ✨ New Features
