@@ -1,3 +1,9 @@
+## [1.3.0](https://github.com/MOD-PROD/modprod-apk-creator/compare/v1.2.0...v1.3.0) (2026-11-02)
+
+### ✨ New Features
+
+* APK Base (nouveau nom et icône), lien de téléchargement dans Morphe, lanceur Android TV ([5e0ae7b](https://github.com/MOD-PROD/modprod-apk-creator/commit/5e0ae7be9f54475c37c0ca567f0ffa9bfb888e5f))
+
 ## [1.2.0](https://github.com/MOD-PROD/modprod-apk-creator/compare/v1.1.0...v1.2.0) (2026-11-02)
 
 ### ✨ New Features

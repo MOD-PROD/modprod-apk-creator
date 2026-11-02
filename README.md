@@ -47,9 +47,19 @@ Détails : [docs/ATV-LAUNCHER.md](docs/ATV-LAUNCHER.md).
 ## 🩹 Patches
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.2.0](https://github.com/MOD-PROD/modprod-apk-creator/releases/tag/v1.2.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;2 patches total
+> **[v1.3.0](https://github.com/MOD-PROD/modprod-apk-creator/releases/tag/v1.3.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;3 patches total
 <details open>
-<summary>📦 ModProd APK Base&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
+<summary>📺 ATV Base (Android TV)&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<br>
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [ATV Launcher](#atv-launcher) | Crée un lanceur Android TV : ouvre un lien, une appli installée, ou l'appli sinon le lien. Nom, package, bannière TV, icône et version. | • Nom du lanceur<br>• Nom de package<br>• Action au lancement<br>• Lien cible<br>• Package de l'appli cible<br>• Bannière TV<br>• Icône<br>• Ranger dans « Jeux »<br>• Version (nom)<br>• Version (code) |
+
+</details>
+
+<details open>
+<summary>📦 APK Base&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
 <br>
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
