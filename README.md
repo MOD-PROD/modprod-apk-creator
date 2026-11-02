@@ -47,7 +47,7 @@ Détails : [docs/ATV-LAUNCHER.md](docs/ATV-LAUNCHER.md).
 ## 🩹 Patches
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.4.0](https://github.com/MOD-PROD/modprod-apk-creator/releases/tag/v1.4.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;3 patches total
+> **[v1.5.0](https://github.com/MOD-PROD/modprod-apk-creator/releases/tag/v1.5.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;3 patches total
 <details open>
 <summary>📺 ATV Base (Android TV)&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
 <br>

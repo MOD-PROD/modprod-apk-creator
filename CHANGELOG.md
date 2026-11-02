@@ -1,3 +1,9 @@
+## [1.5.0](https://github.com/MOD-PROD/modprod-apk-creator/compare/v1.4.0...v1.5.0) (2026-11-02)
+
+### ✨ New Features
+
+* nouveaux noms de package des bases (app.modprod.apkbase, app.modprod.atvlink.base) ([1ffce5b](https://github.com/MOD-PROD/modprod-apk-creator/commit/1ffce5b588f16f1c576085c0708c4dbf105052ca))
+
 ## [1.4.0](https://github.com/MOD-PROD/modprod-apk-creator/compare/v1.3.0...v1.4.0) (2026-11-02)
 
 ### ✨ New Features

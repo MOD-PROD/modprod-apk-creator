@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "patches": [
     {
       "name": "ATV Launcher",
@@ -9,7 +9,7 @@
       "category": null,
       "compatiblePackages": [
         {
-          "packageName": "atv.links",
+          "packageName": "app.modprod.atvlink.base",
           "name": "ATV Base",
           "description": "APK de base Android TV ModProd, à télécharger ici (ne pas chercher ailleurs) : https://github.com/MOD-PROD/modprod-apk-creator/releases/download/base-apk/atv-base.apk",
           "apkFileType": "APK",
@@ -40,7 +40,7 @@
         {
           "key": "packageName",
           "title": "Nom de package",
-          "description": "Identifiant unique du lanceur (ex. com.modprod.tv.youtube). Minuscules, au moins deux segments, lettres/chiffres/_, pas de mot réservé Java.",
+          "description": "Identifiant unique du lanceur (ex. app.modprod.atvlink.youtube). Minuscules, au moins deux segments, lettres/chiffres/_, pas de mot réservé Java.",
           "required": true,
           "type": "kotlin.String",
           "default": null,
@@ -131,7 +131,7 @@
       "category": null,
       "compatiblePackages": [
         {
-          "packageName": "com.gonzo.htmlapp",
+          "packageName": "app.modprod.apkbase",
           "name": "APK Base",
           "description": "APK de base ModProd, à télécharger ici (ne pas chercher ailleurs) : https://github.com/MOD-PROD/modprod-apk-creator/releases/download/base-apk/apk-base.apk",
           "apkFileType": "APK",
@@ -162,7 +162,7 @@
         {
           "key": "packageName",
           "title": "Nom de package",
-          "description": "Identifiant unique de l'appli (ex. com.modprod.quantix). Minuscules, au moins deux segments, lettres/chiffres/_, pas de mot réservé Java.",
+          "description": "Identifiant unique de l'appli (ex. app.modprod.quantix). Minuscules, au moins deux segments, lettres/chiffres/_, pas de mot réservé Java.",
           "required": true,
           "type": "kotlin.String",
           "default": null,
@@ -240,7 +240,7 @@
       "category": null,
       "compatiblePackages": [
         {
-          "packageName": "com.gonzo.htmlapp",
+          "packageName": "app.modprod.apkbase",
           "name": "APK Base",
           "description": "APK de base ModProd, à télécharger ici (ne pas chercher ailleurs) : https://github.com/MOD-PROD/modprod-apk-creator/releases/download/base-apk/apk-base.apk",
           "apkFileType": "APK",
