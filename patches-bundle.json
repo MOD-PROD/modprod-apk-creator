@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-11-02T10:16:15",
-  "description": "## [1.1.0](https://github.com/MOD-PROD/modprod-apk-creator/compare/v1.0.1...v1.1.0) (2026-11-02)\n\n### ✨ New Features\n\n* option Adresse web pour ouvrir un site à la place de la page HTML ([09c43e0](https://github.com/MOD-PROD/modprod-apk-creator/commit/09c43e09ec0e718be1bee7527a8b4ebe0c24799f))",
-  "download_url": "https://github.com/MOD-PROD/modprod-apk-creator/releases/download/v1.1.0/patches-1.1.0.mpp",
+  "created_at": "2026-11-02T10:33:11",
+  "description": "## [1.2.0](https://github.com/MOD-PROD/modprod-apk-creator/compare/v1.1.0...v1.2.0) (2026-11-02)\n\n### ✨ New Features\n\n* patch ModProd Réglages (orientation, plein écran, couleurs, autorisations…) ([1a78762](https://github.com/MOD-PROD/modprod-apk-creator/commit/1a78762b99182cf42eacae1e49bc555292d3450c))",
+  "download_url": "https://github.com/MOD-PROD/modprod-apk-creator/releases/download/v1.2.0/patches-1.2.0.mpp",
   "signature_download_url": "",
-  "version": "1.1.0"
+  "version": "1.2.0"
 }

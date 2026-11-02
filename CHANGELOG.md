@@ -1,3 +1,9 @@
+## [1.2.0](https://github.com/MOD-PROD/modprod-apk-creator/compare/v1.1.0...v1.2.0) (2026-11-02)
+
+### ✨ New Features
+
+* patch ModProd Réglages (orientation, plein écran, couleurs, autorisations…) ([1a78762](https://github.com/MOD-PROD/modprod-apk-creator/commit/1a78762b99182cf42eacae1e49bc555292d3450c))
+
 ## [1.1.0](https://github.com/MOD-PROD/modprod-apk-creator/compare/v1.0.1...v1.1.0) (2026-11-02)
 
 ### ✨ New Features

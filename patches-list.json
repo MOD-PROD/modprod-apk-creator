@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "patches": [
     {
       "name": "ModProd App",
@@ -98,6 +98,154 @@
           "required": false,
           "type": "kotlin.Int",
           "default": null,
+          "values": null
+        }
+      ]
+    },
+    {
+      "name": "ModProd Réglages",
+      "description": "Réglages Android de l'appli : orientation, plein écran, captures d'écran, écran allumé, zoom, couleurs, autorisations (caméra, micro, localisation).",
+      "default": true,
+      "category": null,
+      "compatiblePackages": [
+        {
+          "packageName": "com.gonzo.htmlapp",
+          "name": "ModProd APK Base",
+          "description": null,
+          "apkFileType": "APK",
+          "appIconColor": "#F08A24",
+          "signatures": null,
+          "formFactor": "MOBILE",
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "key": "orientation",
+          "title": "Orientation",
+          "description": "Portrait bloqué, ou suit la rotation du téléphone.",
+          "required": true,
+          "type": "kotlin.String",
+          "default": "portrait",
+          "values": {
+            "Portrait": "portrait",
+            "Automatique (rotation)": "auto"
+          }
+        },
+        {
+          "key": "fullscreen",
+          "title": "Plein écran",
+          "description": "Masque la barre d'état.",
+          "required": false,
+          "type": "kotlin.Boolean",
+          "default": false,
+          "values": null
+        },
+        {
+          "key": "keepScreenOn",
+          "title": "Écran toujours allumé",
+          "description": "L'écran ne se met pas en veille tant que l'appli est ouverte.",
+          "required": false,
+          "type": "kotlin.Boolean",
+          "default": false,
+          "values": null
+        },
+        {
+          "key": "blockScreenshots",
+          "title": "Bloquer les captures d'écran",
+          "description": "Interdit captures et enregistrements, masque l'aperçu dans les applis récentes.",
+          "required": false,
+          "type": "kotlin.Boolean",
+          "default": false,
+          "values": null
+        },
+        {
+          "key": "zoom",
+          "title": "Zoom à deux doigts",
+          "description": null,
+          "required": false,
+          "type": "kotlin.Boolean",
+          "default": false,
+          "values": null
+        },
+        {
+          "key": "scrollBars",
+          "title": "Barres de défilement",
+          "description": null,
+          "required": false,
+          "type": "kotlin.Boolean",
+          "default": false,
+          "values": null
+        },
+        {
+          "key": "debug",
+          "title": "Inspection depuis Chrome PC",
+          "description": "Permet d'inspecter la page via chrome://inspect. À désactiver pour une version publiée.",
+          "required": false,
+          "type": "kotlin.Boolean",
+          "default": false,
+          "values": null
+        },
+        {
+          "key": "backgroundColor",
+          "title": "Couleur de fond",
+          "description": "Fond de l'appli au démarrage, de l'écran de chargement et de la page d'erreur. Vide = inchangé (#141a21).",
+          "required": false,
+          "type": "kotlin.String",
+          "default": null,
+          "values": null
+        },
+        {
+          "key": "barsColor",
+          "title": "Couleur des barres système",
+          "description": "Barre d'état et barre de navigation. Couleur claire = icônes sombres. Vide = inchangé (#141a21).",
+          "required": false,
+          "type": "kotlin.String",
+          "default": null,
+          "values": null
+        },
+        {
+          "key": "accentColor",
+          "title": "Couleur d'accent",
+          "description": "Boutons et curseurs des fenêtres Android (« Save As »…). Vide = inchangé (#f08a24).",
+          "required": false,
+          "type": "kotlin.String",
+          "default": null,
+          "values": null
+        },
+        {
+          "key": "camera",
+          "title": "Autorisation : caméra",
+          "description": "Photo depuis un champ fichier, getUserMedia vidéo.",
+          "required": false,
+          "type": "kotlin.Boolean",
+          "default": false,
+          "values": null
+        },
+        {
+          "key": "microphone",
+          "title": "Autorisation : micro",
+          "description": "getUserMedia audio, enregistrement vocal.",
+          "required": false,
+          "type": "kotlin.Boolean",
+          "default": false,
+          "values": null
+        },
+        {
+          "key": "location",
+          "title": "Autorisation : localisation",
+          "description": "navigator.geolocation.",
+          "required": false,
+          "type": "kotlin.Boolean",
+          "default": false,
           "values": null
         }
       ]
