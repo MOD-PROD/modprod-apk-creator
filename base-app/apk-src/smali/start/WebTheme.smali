@@ -3,7 +3,7 @@
 .source "WebTheme.java"
 
 # web_theme: auto | native | css | invert
-# CSS/invert modes require a page-load injection hook and are not enabled here.
+# Mode native only here. CSS/invert are applied by WebThemeInjector on page load.
 .method public static apply(Landroid/app/Activity;Landroid/webkit/WebView;)V
     .locals 5
 
