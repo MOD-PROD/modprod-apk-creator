@@ -473,6 +473,11 @@
     invoke-static {v0}, Lstart/NativeUiTheme;->applyDarkBackground(Landroid/webkit/WebView;)V
     invoke-static {p0, v0}, Lstart/WebTheme;->apply(Landroid/app/Activity;Landroid/webkit/WebView;)V
 
+    # Long-press WebView to switch theme at runtime
+    new-instance v1, Lstart/ThemeLongClick;
+    invoke-direct {v1, p0}, Lstart/ThemeLongClick;-><init>(Lstart/MainActivity;)V
+    invoke-virtual {v0, v1}, Landroid/webkit/WebView;->setOnLongClickListener(Landroid/view/View$OnLongClickListener;)V
+
     const v0, 0x7f080054
 
     invoke-virtual {p0, v0}, Le/i;->findViewById(I)Landroid/view/View;
@@ -724,9 +729,9 @@
 
     iget-object v0, p0, Lstart/MainActivity;->A:Landroid/content/SharedPreferences;
 
-    const-string v1, "firstrun"
+    const-string v1, "appUpdate"
 
-    const/4 v2, 0x1
+    const/4 v2, 0x0
 
     invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
 
@@ -736,11 +741,7 @@
 
     iget-object v0, p0, Lstart/MainActivity;->D:LT/g;
 
-    iget-object v1, v0, LT/g;->d:Landroid/os/Handler;
-
-    iget-object v0, v0, LT/g;->a:LQ/h;
-
-    invoke-virtual {v1, v0}, Landroid/os/Handler;->removeCallbacks(Ljava/lang/Runnable;)V
+    invoke-virtual {v0}, LT/g;->a()V
 
     :cond_0
     return-void
