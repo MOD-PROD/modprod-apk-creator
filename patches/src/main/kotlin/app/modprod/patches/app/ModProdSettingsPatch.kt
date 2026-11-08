@@ -102,6 +102,20 @@ val modProdSettingsPatch = resourcePatch(
 
     // region Couleurs
 
+    val webTheme by stringOption(
+        key = "webTheme",
+        default = "auto",
+        values = mapOf(
+            "Automatique (respecter le site)" to "auto",
+            "Sombre natif Android" to "native",
+            "Sombre CSS (expérimental)" to "css",
+            "Inversion des couleurs (expérimental)" to "invert",
+        ),
+        title = "Thème des sites web",
+        description = "Le mode natif assombrit les pages compatibles. Les modes CSS et inversion nécessitent le module d'injection et ne sont pas encore actifs.",
+        required = true,
+    ) { it in setOf("auto", "native", "css", "invert") }
+
     val backgroundColor by colorOption(
         key = "backgroundColor",
         title = "Couleur de fond",
@@ -178,6 +192,7 @@ val modProdSettingsPatch = resourcePatch(
             addPermissions(document, permissions)
         }
 
+        setWebTheme(webTheme)
         normalizeColor(backgroundColor)?.let { setBackground(it) }
         normalizeColor(barsColor)?.let { setBars(it) }
         normalizeColor(accentColor)?.let { setAccent(it) }
@@ -309,5 +324,25 @@ private fun ResourcePatchContext.setAccent(color: String) {
             val element = nodes.item(i) as Element
             if (element.getAttribute("name") == "colorAccent") element.textContent = color
         }
+    }
+}
+
+/** Le moteur Android lit cette ressource au lancement. */
+private fun ResourcePatchContext.setWebTheme(mode: String) {
+    document("res/values/strings.xml").use { document ->
+        val nodes = document.getElementsByTagName("string")
+        var element: Element? = null
+        for (i in 0 until nodes.length) {
+            val candidate = nodes.item(i) as Element
+            if (candidate.getAttribute("name") == "web_theme") {
+                element = candidate
+                break
+            }
+        }
+        val target = element ?: document.createElement("string").also {
+            it.setAttribute("name", "web_theme")
+            document.documentElement.appendChild(it)
+        }
+        target.textContent = mode
     }
 }
