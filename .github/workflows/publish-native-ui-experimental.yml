@@ -1,11 +1,8 @@
 name: Publish native-ui experimental base
 
-# Publie une base APK + patches expérimentaux pour tester WebTheme / native UI.
-# N'écrit JAMAIS dans la release production « base-apk ».
-# Release cible : tag prerelease « native-ui-experimental ».
-#
-# Note: workflow_dispatch only works from default branch; on this feature
-# branch the workflow is triggered by push to the paths below.
+# Publie une base APK + patches experimentaux pour tester WebTheme / native UI.
+# N'ecrit JAMAIS dans la release production base-apk.
+# Release cible : tag prerelease native-ui-experimental.
 
 on:
   workflow_dispatch:
@@ -53,7 +50,6 @@ jobs:
             "https://github.com/iBotPeaches/Apktool/releases/download/v${APKTOOL_VERSION}/apktool_${APKTOOL_VERSION}.jar"
           cp -r base-app/apk-src build-src
           python3 .github/scripts/apktool_json_to_yml.py build-src "$APKTOOL_VERSION"
-          # Sanity: WebTheme classes and web_theme string must be present
           test -f build-src/smali/start/WebTheme.smali
           test -f build-src/smali/start/WebThemeInjector.smali
           grep -q 'name="web_theme"' build-src/res/values/strings.xml
@@ -72,9 +68,9 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
-          NOTES="Base APK + patches expérimentaux (WebTheme / native UI).
+          NOTES="Base APK + patches experimentaux (WebTheme / native UI).
 
-**Ne pas utiliser en production.**
+Ne pas utiliser en production.
 
 - apk-base.apk : contient WebTheme + WebThemeInjector
 - patches-native-ui.mpp : option webTheme (auto/native/css/invert)
