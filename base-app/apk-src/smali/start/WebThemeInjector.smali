@@ -6,16 +6,8 @@
     .locals 6
 
     if-eqz p1, :done
-    invoke-virtual {p0}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
-    move-result-object v0
-    invoke-virtual {p0}, Landroid/content/Context;->getPackageName()Ljava/lang/String;
-    move-result-object v1
-    const-string v2, "web_theme"
-    const-string v3, "string"
-    invoke-virtual {v0, v2, v3, v1}, Landroid/content/res/Resources;->getIdentifier(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I
-    move-result v0
-    if-eqz v0, :done
-    invoke-virtual {p0, v0}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    invoke-static {p0}, Lstart/WebThemePrefs;->get(Landroid/content/Context;)Ljava/lang/String;
     move-result-object v0
 
     const-string v1, "css"
