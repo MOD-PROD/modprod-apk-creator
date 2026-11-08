@@ -112,6 +112,8 @@
 
     invoke-super {p0, v0, p2}, Landroid/webkit/WebViewClient;->onPageFinished(Landroid/webkit/WebView;Ljava/lang/String;)V
 
+    invoke-static {p1, v0}, Lstart/WebThemeInjector;->inject(Landroid/app/Activity;Landroid/webkit/WebView;)V
+
     const p2, 0x7f08003d
 
     invoke-virtual {p1, p2}, Le/i;->findViewById(I)Landroid/view/View;
