@@ -1,0 +1,38 @@
+name: Tester APK Base Native (sans publication)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [feature/native-ui-asset-library]
+    paths:
+      - 'base-app/apk-src/**'
+      - '.github/workflows/native-ui-test.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build-native:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Installer Apktool
+        run: curl -fLsS -o apktool.jar https://github.com/iBotPeaches/Apktool/releases/download/v2.12.1/apktool_2.12.1.jar
+      - name: Préparer les sources
+        run: |
+          cp -r base-app/apk-src build-src
+          python3 .github/scripts/apktool_json_to_yml.py build-src 2.12.1
+      - name: Compiler sans signer
+        run: java -jar apktool.jar b build-src -o native-ui-test-unsigned.apk
+      - name: Conserver le résultat de compilation pour diagnostic
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-ui-test-unsigned
+          path: native-ui-test-unsigned.apk
+          retention-days: 7
+
+# IMPORTANT : ce workflow ne publie aucune release et ne signe aucun APK utilisateur.
