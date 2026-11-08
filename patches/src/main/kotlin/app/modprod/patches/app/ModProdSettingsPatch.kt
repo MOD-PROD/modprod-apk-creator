@@ -192,7 +192,7 @@ val modProdSettingsPatch = resourcePatch(
             addPermissions(document, permissions)
         }
 
-        setWebTheme(webTheme)
+        setWebTheme(webTheme ?: "auto")
         normalizeColor(backgroundColor)?.let { setBackground(it) }
         normalizeColor(barsColor)?.let { setBars(it) }
         normalizeColor(accentColor)?.let { setAccent(it) }
