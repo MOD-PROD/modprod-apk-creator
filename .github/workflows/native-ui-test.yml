@@ -14,6 +14,10 @@ permissions:
 jobs:
   build-native:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        theme: [auto, native, css, invert]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
@@ -26,28 +30,35 @@ jobs:
         run: |
           cp -r base-app/apk-src build-src
           python3 .github/scripts/apktool_json_to_yml.py build-src 2.12.1
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("build-src/res/values/strings.xml")
+          text = p.read_text()
+          assert '<string name="web_theme">auto</string>' in text
+          p.write_text(text.replace('<string name="web_theme">auto</string>', '<string name="web_theme">${{ matrix.theme }}</string>'))
+          PY
       - name: Compiler sans signer
-        run: java -jar apktool.jar b build-src -o native-ui-test-unsigned.apk
+        run: java -jar apktool.jar b build-src -o native-ui-test-${{ matrix.theme }}-unsigned.apk
       - name: Signer APK de test avec une clé éphémère
         run: |
           set -euo pipefail
           keytool -genkeypair -noprompt -keystore test-only.jks -storepass androidtest -keypass androidtest -alias temporary-test -keyalg RSA -keysize 3072 -validity 30 -dname "CN=Temporary APK Factory Test,O=ModProd Test"
           BT="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -1)"
-          "$BT/zipalign" -p -f 4 native-ui-test-unsigned.apk native-ui-test-aligned.apk
-          "$BT/apksigner" sign --ks test-only.jks --ks-key-alias temporary-test --ks-pass pass:androidtest --key-pass pass:androidtest --out native-ui-test-installable.apk native-ui-test-aligned.apk
-          "$BT/apksigner" verify --print-certs native-ui-test-installable.apk
-          rm -f test-only.jks native-ui-test-aligned.apk
+          "$BT/zipalign" -p -f 4 native-ui-test-${{ matrix.theme }}-unsigned.apk native-ui-test-${{ matrix.theme }}-aligned.apk
+          "$BT/apksigner" sign --ks test-only.jks --ks-key-alias temporary-test --ks-pass pass:androidtest --key-pass pass:androidtest --out native-ui-test-${{ matrix.theme }}-installable.apk native-ui-test-${{ matrix.theme }}-aligned.apk
+          "$BT/apksigner" verify --print-certs native-ui-test-${{ matrix.theme }}-installable.apk
+          rm -f test-only.jks native-ui-test-${{ matrix.theme }}-aligned.apk
       - name: Fournir l'APK installable pour les tests
         uses: actions/upload-artifact@v4
         with:
-          name: native-ui-test-installable
-          path: native-ui-test-installable.apk
+          name: native-ui-test-${{ matrix.theme }}-installable
+          path: native-ui-test-${{ matrix.theme }}-installable.apk
           retention-days: 7
       - name: Conserver le résultat de compilation pour diagnostic
         uses: actions/upload-artifact@v4
         with:
-          name: native-ui-test-unsigned
-          path: native-ui-test-unsigned.apk
+          name: native-ui-test-${{ matrix.theme }}-unsigned
+          path: native-ui-test-${{ matrix.theme }}-unsigned.apk
           retention-days: 7
 
 # IMPORTANT : clé éphémère créée pour chaque run, sans secret ModProd. Ne pas utiliser pour des mises à jour ou la production.
