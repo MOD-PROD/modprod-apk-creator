@@ -1,4 +1,4 @@
-name: Tester APK Base Native (sans publication)
+name: Tester APK Base Native (APK de test)
 
 on:
   workflow_dispatch:
@@ -28,6 +28,21 @@ jobs:
           python3 .github/scripts/apktool_json_to_yml.py build-src 2.12.1
       - name: Compiler sans signer
         run: java -jar apktool.jar b build-src -o native-ui-test-unsigned.apk
+      - name: Signer APK de test avec une clé éphémère
+        run: |
+          set -euo pipefail
+          keytool -genkeypair -noprompt -keystore test-only.jks -storepass androidtest -keypass androidtest -alias temporary-test -keyalg RSA -keysize 3072 -validity 30 -dname "CN=Temporary APK Factory Test,O=ModProd Test"
+          BT="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -1)"
+          "$BT/zipalign" -p -f 4 native-ui-test-unsigned.apk native-ui-test-aligned.apk
+          "$BT/apksigner" sign --ks test-only.jks --ks-key-alias temporary-test --ks-pass pass:androidtest --key-pass pass:androidtest --out native-ui-test-installable.apk native-ui-test-aligned.apk
+          "$BT/apksigner" verify --print-certs native-ui-test-installable.apk
+          rm -f test-only.jks native-ui-test-aligned.apk
+      - name: Fournir l'APK installable pour les tests
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-ui-test-installable
+          path: native-ui-test-installable.apk
+          retention-days: 7
       - name: Conserver le résultat de compilation pour diagnostic
         uses: actions/upload-artifact@v4
         with:
@@ -35,4 +50,5 @@ jobs:
           path: native-ui-test-unsigned.apk
           retention-days: 7
 
-# IMPORTANT : ce workflow ne publie aucune release et ne signe aucun APK utilisateur.
+# IMPORTANT : clé éphémère créée pour chaque run, sans secret ModProd. Ne pas utiliser pour des mises à jour ou la production.
+# Aucun APK n'est publié en release.
