@@ -68,15 +68,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
-          NOTES="Base APK + patches experimentaux (WebTheme / native UI).
-
-Ne pas utiliser en production.
-
-- apk-base.apk : contient WebTheme + WebThemeInjector
-- patches-native-ui.mpp : option webTheme (auto/native/css/invert)
-
-Branche source : feature/native-ui-asset-library
-Commit : ${GITHUB_SHA}"
+          NOTES="Base APK + patches experimentaux (WebTheme / native UI). Ne pas utiliser en production. apk-base.apk contient WebTheme + WebThemeInjector. patches-native-ui.mpp option webTheme. Commit ${GITHUB_SHA}"
           if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
             gh release edit "$RELEASE_TAG" --notes "$NOTES" --prerelease
           else
