@@ -471,6 +471,7 @@
 
     # Native UI: keep the WebView surface black while pages load.
     invoke-static {v0}, Lstart/NativeUiTheme;->applyDarkBackground(Landroid/webkit/WebView;)V
+    invoke-static {p0, v0}, Lstart/WebTheme;->apply(Landroid/app/Activity;Landroid/webkit/WebView;)V
 
     const v0, 0x7f080054
 
