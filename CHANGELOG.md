@@ -1,3 +1,9 @@
+## [1.6.0](https://github.com/MOD-PROD/modprod-apk-creator/compare/v1.5.0...v1.6.0) (2026-11-09)
+
+### ✨ New Features
+
+* réglages Android 15+ et thème des sites web dans la base ([3f2486b](https://github.com/MOD-PROD/modprod-apk-creator/commit/3f2486b942f76fee1d944d188a5fec43a2a564dc))
+
 ## [1.5.0](https://github.com/MOD-PROD/modprod-apk-creator/compare/v1.4.0...v1.5.0) (2026-11-02)
 
 ### ✨ New Features

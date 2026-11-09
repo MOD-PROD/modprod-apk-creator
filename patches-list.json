@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "patches": [
     {
       "name": "ATV Launcher",
@@ -324,6 +324,20 @@
           "type": "kotlin.Boolean",
           "default": false,
           "values": null
+        },
+        {
+          "key": "webTheme",
+          "title": "Thème des sites web",
+          "description": "Thème appliqué aux pages au premier lancement. Natif : assombrissement Android ; CSS : fond sombre forcé ; inversion : couleurs inversées. Modifiable dans l'appli par un appui long sur une zone vide de la page.",
+          "required": true,
+          "type": "kotlin.String",
+          "default": "auto",
+          "values": {
+            "Automatique (respecter le site)": "auto",
+            "Sombre natif Android": "native",
+            "Sombre CSS (expérimental)": "css",
+            "Inversion des couleurs (expérimental)": "invert"
+          }
         },
         {
           "key": "backgroundColor",
