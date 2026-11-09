@@ -469,6 +469,14 @@
 
     iput-object v0, p0, Lstart/MainActivity;->x:Landroid/webkit/WebView;
 
+    # Thème des sites web : fond, mode choisi, menu par appui long
+    invoke-static {v0}, Lstart/NativeUiTheme;->applyDarkBackground(Landroid/webkit/WebView;)V
+    invoke-static {p0, v0}, Lstart/WebTheme;->apply(Landroid/app/Activity;Landroid/webkit/WebView;)V
+
+    new-instance v1, Lstart/ThemeLongClick;
+    invoke-direct {v1, p0}, Lstart/ThemeLongClick;-><init>(Lstart/MainActivity;)V
+    invoke-virtual {v0, v1}, Landroid/webkit/WebView;->setOnLongClickListener(Landroid/view/View$OnLongClickListener;)V
+
     const v0, 0x7f080054
 
     invoke-virtual {p0, v0}, Le/i;->findViewById(I)Landroid/view/View;

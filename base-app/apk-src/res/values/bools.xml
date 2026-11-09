@@ -7,5 +7,6 @@
     <bool name="fullscr">false</bool>
     <bool name="isDebugMode">false</bool>
     <bool name="keepScreenOn">false</bool>
+    <bool name="lightBars">false</bool>
     <bool name="portrait">true</bool>
 </resources>

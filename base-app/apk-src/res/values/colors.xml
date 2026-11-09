@@ -10,6 +10,7 @@
     <color name="androidx_core_secondary_text_default_material_light">#8a000000</color>
     <color name="background_floating_material_light">@android:color/white</color>
     <color name="button_material_light">#ffd6d7d7</color>
+    <color name="modprod_bars">#ff141a21</color>
     <color name="colorAccent">#fff08a24</color>
     <color name="colorButtonPrimary">#ff79c447</color>
     <color name="colorPrimary">#ff303030</color>

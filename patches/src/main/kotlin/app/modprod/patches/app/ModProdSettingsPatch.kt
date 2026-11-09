@@ -102,6 +102,21 @@ val modProdSettingsPatch = resourcePatch(
 
     // region Couleurs
 
+    val webTheme by stringOption(
+        key = "webTheme",
+        default = "auto",
+        values = mapOf(
+            "Automatique (respecter le site)" to "auto",
+            "Sombre natif Android" to "native",
+            "Sombre CSS (expérimental)" to "css",
+            "Inversion des couleurs (expérimental)" to "invert",
+        ),
+        title = "Thème des sites web",
+        description = "Thème appliqué aux pages au premier lancement. Natif : assombrissement Android ; CSS : fond sombre forcé ; " +
+            "inversion : couleurs inversées. Modifiable dans l'appli par un appui long sur une zone vide de la page.",
+        required = true,
+    ) { it in setOf("auto", "native", "css", "invert") }
+
     val backgroundColor by colorOption(
         key = "backgroundColor",
         title = "Couleur de fond",
@@ -178,6 +193,11 @@ val modProdSettingsPatch = resourcePatch(
             addPermissions(document, permissions)
         }
 
+        setWebTheme(webTheme ?: "auto")
+        // Android 13+ : l'assombrissement natif ne marche qu'avec un thème d'appli sombre.
+        if (webTheme == "native") {
+            document("res/values/styles.xml").use { setThemeItems(it, mapOf("android:isLightTheme" to "false")) }
+        }
         normalizeColor(backgroundColor)?.let { setBackground(it) }
         normalizeColor(barsColor)?.let { setBars(it) }
         normalizeColor(accentColor)?.let { setAccent(it) }
@@ -289,6 +309,10 @@ private fun ResourcePatchContext.setBackground(color: String) {
 
 private fun ResourcePatchContext.setBars(color: String) {
     val light = isLightColor(color).toString()
+    // Android 15+ (bord à bord) : la base peint elle-même la zone des barres avec modprod_bars,
+    // et choisit la couleur des icônes avec lightBars.
+    setBools(mapOf("lightBars" to isLightColor(color)))
+    setColor("modprod_bars", color)
     document("res/values/styles.xml").use { document ->
         setThemeItems(
             document,
@@ -309,5 +333,45 @@ private fun ResourcePatchContext.setAccent(color: String) {
             val element = nodes.item(i) as Element
             if (element.getAttribute("name") == "colorAccent") element.textContent = color
         }
+    }
+}
+
+/** Le moteur Android lit cette ressource au lancement. */
+private fun ResourcePatchContext.setWebTheme(mode: String) {
+    document("res/values/strings.xml").use { document ->
+        val nodes = document.getElementsByTagName("string")
+        var element: Element? = null
+        for (i in 0 until nodes.length) {
+            val candidate = nodes.item(i) as Element
+            if (candidate.getAttribute("name") == "web_theme") {
+                element = candidate
+                break
+            }
+        }
+        val target = element ?: document.createElement("string").also {
+            it.setAttribute("name", "web_theme")
+            document.documentElement.appendChild(it)
+        }
+        target.textContent = mode
+    }
+}
+
+/** Remplace (ou ajoute) une couleur de res/values/colors.xml. */
+private fun ResourcePatchContext.setColor(name: String, color: String) {
+    document("res/values/colors.xml").use { document ->
+        val nodes = document.getElementsByTagName("color")
+        var element: Element? = null
+        for (i in 0 until nodes.length) {
+            val candidate = nodes.item(i) as Element
+            if (candidate.getAttribute("name") == name) {
+                element = candidate
+                break
+            }
+        }
+        val target = element ?: document.createElement("color").also {
+            it.setAttribute("name", name)
+            document.documentElement.appendChild(it)
+        }
+        target.textContent = color
     }
 }
